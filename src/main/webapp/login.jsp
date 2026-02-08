@@ -4,270 +4,263 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ocean View Resort | Login</title>
+  <title>Ocean View Resort | Staff Login</title>
 
   <style>
     :root{
-      --bg1:#0b1220;
-      --bg2:#0f1d3a;
-      --card:#0f172a;
-      --border:rgba(255,255,255,.10);
-      --text:#e5e7eb;
-      --muted:rgba(229,231,235,.75);
-      --accent:#22c55e;
-      --accent2:#38bdf8;
-      --danger:#ef4444;
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --text:#ffffff;
+      --muted:rgba(255,255,255,.75);
+      --panel:rgba(10,14,22,.55);
+      --panel2:rgba(10,14,22,.35);
+      --border:rgba(255,255,255,.14);
+      --btn:#f97316;
+      --btnHover:#fb923c;
+      --shadow: 0 28px 80px rgba(0,0,0,.55);
       --radius: 18px;
     }
 
     *{ box-sizing:border-box; }
+
     body{
       margin:0;
       min-height:100vh;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: var(--text);
+      background:#050812;
+    }
+
+    /* Background image */
+    .bg{
+      position:fixed;
+      inset:0;
       background:
-              radial-gradient(1100px 600px at 15% 10%, rgba(56,189,248,.22), transparent 60%),
-              radial-gradient(900px 500px at 85% 20%, rgba(34,197,94,.18), transparent 60%),
-              linear-gradient(180deg, var(--bg1), var(--bg2));
+              linear-gradient(90deg, rgba(0,0,0,.65), rgba(0,0,0,.35)),
+              url("<%=request.getContextPath()%>/assets/img/login-bg.jpg") center/cover no-repeat;
+    }
+
+    .wrap{
+      position:relative;
+      min-height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
       padding:28px;
     }
 
-    .wrap{
-      width: min(1020px, 100%);
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:24px;
-      align-items:stretch;
-    }
-
-    .hero{
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-      background:
-              linear-gradient(135deg, rgba(56,189,248,.18), transparent 55%),
-              linear-gradient(225deg, rgba(34,197,94,.16), transparent 55%),
-              rgba(15,23,42,.72);
-      padding:28px;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      padding:10px 12px;
-      border-radius:999px;
-      font-size:13px;
-      color:var(--muted);
-      backdrop-filter: blur(8px);
-    }
-    .dot{
-      width:10px;height:10px;border-radius:999px;
-      background: linear-gradient(90deg, var(--accent2), var(--accent));
-      box-shadow: 0 0 0 6px rgba(56,189,248,.12);
-    }
-
-    h1{
-      margin:18px 0 8px;
-      font-size: clamp(28px, 3.4vw, 44px);
-      line-height:1.05;
-      letter-spacing:-0.02em;
-    }
-    .sub{
-      margin:0;
-      max-width:46ch;
-      color: var(--muted);
-      font-size: 15px;
-      line-height:1.6;
-    }
-
-    .stats{
-      margin-top:22px;
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-    }
-    .stat{
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.03);
-      border-radius: 14px;
-      padding:14px;
-    }
-    .stat .k{
-      font-size:12px;
-      color:var(--muted);
-    }
-    .stat .v{
-      margin-top:6px;
-      font-size:18px;
-      font-weight:700;
-    }
-
     .card{
-      border:1px solid var(--border);
+      width:min(1100px,100%);
+      display:grid;
+      grid-template-columns: 1.35fr .85fr;
       border-radius: var(--radius);
+      overflow:hidden;
+      border:1px solid var(--border);
       box-shadow: var(--shadow);
-      background: rgba(15,23,42,.82);
-      padding:26px;
-    }
-    .card h2{
-      margin:0 0 6px;
-      font-size:20px;
-    }
-    .card p{
-      margin:0 0 18px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.5;
+      backdrop-filter: blur(10px);
     }
 
-    .field{
-      margin-bottom:12px;
+    /* LEFT PANEL */
+    .left{
+      padding:52px 48px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.15));
     }
+
+    .left-top h1{
+      margin:0;
+      font-size: clamp(40px, 4.5vw, 64px);
+      font-weight: 800;
+      line-height:1.05;
+    }
+
+    .left-top .subtitle{
+      margin-top:14px;
+      font-size:16px;
+      font-weight:600;
+      color:rgba(255,255,255,.85);
+    }
+
+    .left-top .desc{
+      margin-top:18px;
+      max-width:54ch;
+      font-size:14.5px;
+      line-height:1.7;
+      color:var(--muted);
+    }
+
+    /* Social links */
+    .social{
+      display:flex;
+      gap:12px;
+      margin-top:24px;
+    }
+
+    .social a{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      color: var(--text);
+      font-size:14px;
+      font-weight:700;
+      transition: background .2s ease, transform .08s ease;
+    }
+
+    .social a:hover{
+      background: rgba(255,255,255,.12);
+    }
+
+    .social a:active{
+      transform: translateY(1px);
+    }
+
+    /* RIGHT PANEL */
+    .right{
+      padding:42px 36px;
+      background: linear-gradient(180deg, var(--panel), var(--panel2));
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .right h2{
+      margin:0 0 24px;
+      text-align:center;
+      font-size:26px;
+      font-weight:700;
+      letter-spacing:.4px;
+    }
+
+    .err{
+      margin-bottom:16px;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(239,68,68,.40);
+      background: rgba(239,68,68,.10);
+      color:#fee2e2;
+      font-size: 13px;
+    }
+
     label{
       display:block;
       font-size:12px;
-      color:var(--muted);
-      margin:0 0 6px;
+      color: var(--muted);
+      margin-bottom:6px;
     }
+
+    .field{ margin-bottom:16px; }
+
     .input{
       width:100%;
-      padding:12px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(2,6,23,.35);
-      color:var(--text);
+      height:44px;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
       outline:none;
     }
+
     .input:focus{
-      border-color: rgba(56,189,248,.55);
-      box-shadow: 0 0 0 4px rgba(56,189,248,.16);
-    }
-
-    .row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin:10px 0 16px;
-    }
-
-    .hint{
-      font-size:12px;
-      color: var(--muted);
+      border-color: rgba(255,255,255,.40);
+      box-shadow: 0 0 0 4px rgba(255,255,255,.12);
     }
 
     .btn{
       width:100%;
-      border: none;
-      border-radius: 14px;
-      padding:12px 14px;
-      font-weight:700;
+      height:46px;
+      border:none;
+      border-radius: 12px;
+      font-weight:800;
       cursor:pointer;
-      color:#061014;
-      background: linear-gradient(90deg, var(--accent2), var(--accent));
-      transition: transform .06s ease, filter .2s ease;
+      background: var(--btn);
+      color:#0b0f17;
+      transition: background .2s ease, transform .08s ease;
     }
-    .btn:active{ transform: translateY(1px); }
-    .btn:hover{ filter: brightness(1.05); }
 
-    .err{
-      margin: 0 0 14px;
-      padding:10px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(239,68,68,.35);
-      background: rgba(239,68,68,.10);
-      color: #fecaca;
-      font-size: 13px;
-    }
+    .btn:hover{ background: var(--btnHover); }
+    .btn:active{ transform: translateY(1px); }
 
     .footer{
-      margin-top:14px;
-      font-size:12px;
-      color:var(--muted);
+      margin-top:18px;
       text-align:center;
+      font-size:12px;
+      color:rgba(255,255,255,.65);
     }
 
     @media (max-width: 900px){
-      .wrap{ grid-template-columns: 1fr; }
-      .stats{ grid-template-columns: 1fr; }
+      .card{ grid-template-columns: 1fr; }
+      .left{ text-align:center; }
+      .left-top .desc{ margin-left:auto; margin-right:auto; }
+      .social{ justify-content:center; }
     }
   </style>
 </head>
+
 <body>
+<div class="bg"></div>
 
 <div class="wrap">
+  <div class="card">
 
-  <section class="hero">
-    <div class="badge">
-      <span class="dot"></span>
-      Ocean View Resort • Room Reservation System
-    </div>
+    <!-- LEFT -->
+    <section class="left">
+      <div class="left-top">
+        <h1>Welcome Back</h1>
+        <div class="subtitle">Ocean View Resort – Staff Portal</div>
 
-    <h1>Welcome back 👋</h1>
-    <p class="sub">
-      Log in to manage guest reservations, view booking details, and generate bills safely.
-      This system is built with Java EE (Servlets + JSP) and MySQL.
-    </p>
-
-    <div class="stats">
-      <div class="stat">
-        <div class="k">Security</div>
-        <div class="v">Session Login</div>
-      </div>
-      <div class="stat">
-        <div class="k">Storage</div>
-        <div class="v">MySQL (XAMPP)</div>
-      </div>
-      <div class="stat">
-        <div class="k">Architecture</div>
-        <div class="v">MVC + DAO</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="card">
-    <h2>Staff Login</h2>
-    <p>Enter your credentials to access the reservation dashboard.</p>
-
-    <% String error = (String) request.getAttribute("error"); %>
-    <% if (error != null) { %>
-    <div class="err"><%= error %></div>
-    <% } %>
-
-    <form method="post" action="<%= request.getContextPath() %>/login">
-      <div class="field">
-        <label for="username">Username</label>
-        <input class="input" id="username" name="username" type="text" placeholder="e.g. admin" required />
+        <div class="desc">
+          This secure internal platform enables authorized staff to manage
+          room reservations, guest information, and billing operations with
+          efficiency and accuracy.
+          <br/><br/>
+          Access is restricted to registered personnel only.
+        </div>
       </div>
 
-      <div class="field">
-        <label for="password">Password</label>
-        <input class="input" id="password" name="password" type="password" placeholder="••••••••" required />
+      <div class="social">
+        <a href="#" title="Facebook" onclick="return false;">f</a>
+        <a href="#" title="Instagram" onclick="return false;">ig</a>
+        <a href="#" title="Twitter" onclick="return false;">x</a>
+        <a href="#" title="YouTube" onclick="return false;">yt</a>
       </div>
+    </section>
 
-      <div class="row">
-        <span class="hint">Tip: Use the demo user you inserted in DB.</span>
+    <!-- RIGHT -->
+    <section class="right">
+      <h2>Staff Login</h2>
+
+      <% String error = (String) request.getAttribute("error"); %>
+      <% if (error != null) { %>
+      <div class="err"><%= error %></div>
+      <% } %>
+
+      <form method="post" action="<%= request.getContextPath() %>/login">
+        <div class="field">
+          <label for="username">Username</label>
+          <input class="input" id="username" name="username" type="text" required />
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input class="input" id="password" name="password" type="password" required />
+        </div>
+
+        <button class="btn" type="submit">Authenticate</button>
+      </form>
+
+      <div class="footer">
+        © Ocean View Resort • Authorized Personnel Only
       </div>
+    </section>
 
-      <button class="btn" type="submit">Sign in</button>
-    </form>
-
-    <div class="footer">
-      © Ocean View Resort • Internal Use Only
-    </div>
-  </section>
-
+  </div>
 </div>
-
 </body>
 </html>
