@@ -17,7 +17,6 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // show login page
         RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
         rd.forward(request, response);
     }
@@ -36,10 +35,15 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
 
-            // Redirect to dashboard
-            response.sendRedirect(request.getContextPath() + "/dashboard.jsp");
+            // Success message + redirect after delay
+            request.setAttribute("success", "Authentication successful. Redirecting to dashboard...");
+            request.setAttribute("redirectUrl", request.getContextPath() + "/dashboard.jsp");
+
+            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+            rd.forward(request, response);
+
         } else {
-            request.setAttribute("error", "Invalid username or password. Try again.");
+            request.setAttribute("error", "Invalid username or password.");
             RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
             rd.forward(request, response);
         }
