@@ -194,6 +194,17 @@
       color:rgba(255,255,255,.65);
     }
 
+    .success{
+      margin-bottom:16px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(34,197,94,.45);
+      background: rgba(34,197,94,.15);
+      color:#dcfce7;
+      font-size:13px;
+      text-align:center;
+    }
+
     @media (max-width: 900px){
       .card{ grid-template-columns: 1fr; }
       .left{ text-align:center; }
@@ -237,8 +248,20 @@
       <h2>Staff Login</h2>
 
       <% String error = (String) request.getAttribute("error"); %>
+      <% String success = (String) request.getAttribute("success"); %>
+
       <% if (error != null) { %>
       <div class="err"><%= error %></div>
+      <% } %>
+
+      <% if (success != null) { %>
+      <div class="success"><%= success %></div>
+
+      <script>
+        setTimeout(function () {
+          window.location.href = "<%= request.getAttribute("redirectUrl") %>";
+        }, 2000);
+      </script>
       <% } %>
 
       <form method="post" action="<%= request.getContextPath() %>/login">
