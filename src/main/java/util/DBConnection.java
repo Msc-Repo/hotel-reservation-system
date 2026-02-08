@@ -5,23 +5,21 @@ import java.sql.DriverManager;
 
 public class DBConnection {
 
-    private static Connection connection;
+    private static Connection con;
 
-    private DBConnection(){}
+    public static Connection getConnection() throws Exception {
 
-    public static Connection getConnection() {
-        try {
-            if(connection == null || connection.isClosed()){
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                connection = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/hotel_db",
-                        "root",
-                        ""
-                );
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(con == null || con.isClosed()) {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/hotel_db",
+                    "root",
+                    ""
+            );
         }
-        return connection;
+
+        return con;
     }
 }
